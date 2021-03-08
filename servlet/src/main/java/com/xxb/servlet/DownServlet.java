@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-@WebServlet("/down")
+@WebServlet("/user/down")
 public class DownServlet extends HttpServlet {
 
     @Override

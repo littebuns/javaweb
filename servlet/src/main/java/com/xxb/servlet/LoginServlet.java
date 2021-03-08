@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +26,12 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String pwd = req.getParameter("password");
-        if (username != null && userMap.get(username).equals(pwd)){
+        if ("".equals(username)){
+            PrintWriter writer = resp.getWriter();
+            writer.write("用户名不能为空");
+
+        }
+        if (null != username && userMap.get(username).equals(pwd)){
             //登录成功，把用户名放入seesion中
             req.getSession().setAttribute("user", username);
             //将登录时间保存在cookie
