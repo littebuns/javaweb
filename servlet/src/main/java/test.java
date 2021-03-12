@@ -1,24 +1,37 @@
+import com.xxb.dao.BaseDao;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Properties;
 
 public class test {
 
 
-    public static void main(String[] args) throws ParseException {
-        int i = lastDayOfMonth("2021-02-16 03:24:46");
-        System.out.println(i);
+    public static void main(String[] args) throws ParseException, SQLException {
+        InputStream inputStream = BaseDao.class.getClassLoader().getResourceAsStream("jdbc.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String url = properties.getProperty("url");
+        String user = properties.getProperty("user");
+        String password = properties.getProperty("password");
+        Connection connection = DriverManager.getConnection(url, user, password);
+        Driver driver = DriverManager.getDriver(url);
+        System.out.println(driver);
+        System.out.println(connection);
     }
 
 
-    static int lastDayOfMonth(String time) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-MM-HH").parse(time);
-        Calendar instance = Calendar.getInstance();
-        instance.setTime(date);
-        instance.add(Calendar.MONTH, 1);
-        instance.set(Calendar.DAY_OF_MONTH, 0);
-        return instance.get(Calendar.DAY_OF_MONTH);
-    }
 }
 

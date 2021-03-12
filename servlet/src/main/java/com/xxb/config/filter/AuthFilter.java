@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
         String user = (String) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
         //未从seesion中取出数据，则判定为未登录
         if (null == user || "".equals(user)){
-            ((HttpServletResponse)servletResponse).sendRedirect("/index.jsp");
+            ((HttpServletResponse)servletResponse).sendRedirect("/login.jsp");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
