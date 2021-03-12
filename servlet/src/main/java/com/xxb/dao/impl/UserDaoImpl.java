@@ -18,13 +18,13 @@ public class UserDaoImpl implements UserDao {
      * @return
      */
     @Override
-    public User listUserByName(String name, Connection connection) {
+    public User listUserByName(String name, Connection connection) throws SQLException {
         User user = new User();
         ResultSet rs = null;
         PreparedStatement preparedStatement = null;
         String sql = "select * from user where name = ?";
         Object[] params = {name};
-        try {
+        if (null != connection){
             rs = BaseDao.execute(connection, sql, params, preparedStatement, rs);
             if (rs.next()){
                 int id = rs.getInt(1);
@@ -35,10 +35,8 @@ public class UserDaoImpl implements UserDao {
                 user.setPassword(password);
                 user.setUuid(uuid);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-
+        BaseDao.close(null, rs, preparedStatement);
         return user;
     }
 

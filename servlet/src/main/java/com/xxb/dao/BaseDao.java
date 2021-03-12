@@ -65,27 +65,33 @@ public class BaseDao {
      * @param preparedStatement
      * @return
      */
-    public Boolean close(Connection connection, ResultSet resultSet, PreparedStatement preparedStatement){
+    public static Boolean close(Connection connection, ResultSet resultSet, PreparedStatement preparedStatement){
         boolean flag = true;
         try {
-            resultSet.close();
-            resultSet = null;
+            if (null != resultSet){
+                resultSet.close();
+                resultSet = null;
+            }
         } catch (SQLException throwables) {
             flag = false;
             throwables.printStackTrace();
         }
 
         try {
-            preparedStatement.close();
-            preparedStatement = null;
+            if (null != preparedStatement){
+                preparedStatement.close();
+                preparedStatement = null;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             flag = false;
         }
 
         try {
-            connection.close();
-            connection = null;
+            if (null != connection){
+                connection.close();
+                connection = null;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             flag = false;
