@@ -13,7 +13,6 @@ public class GlobelExceptionReslover implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
         if (e instanceof NullPointerException){
-//            e.printStackTrace();
             System.out.println("代码存在空指针");
         }
         return null;

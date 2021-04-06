@@ -1,4 +1,4 @@
-package com.chidan.server;
+package com.xxb.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

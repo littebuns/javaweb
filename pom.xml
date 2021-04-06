@@ -24,6 +24,7 @@
     <modules>
         <module>servlet</module>
         <module>mybaits</module>
+        <module>leetcode</module>
     </modules>
 
     <dependencies>
